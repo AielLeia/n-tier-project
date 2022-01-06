@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -14,56 +13,48 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import java.util.Objects;
+import java.util.Set;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
-@Table(name = "t_profil")
-@AllArgsConstructor
-@NoArgsConstructor
+@Table(name = "t_publication")
 @Getter
 @Setter
 @ToString
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
-public class Profil {
+public class Publication {
 
   @Id
   @GeneratedValue(strategy = IDENTITY)
   @Column(name = "p_id")
   private Long id;
 
-  @Column(name = "p_nom", nullable = false)
-  private String nom;
+  @Column(name = "p_image")
+  private String image;
 
-  @Column(name = "p_prenom", nullable = false)
-  private String prenom;
-
-  @Column(name = "p_photos", nullable = false)
-  private String photos;
-
-  @Column(name = "p_couverture")
-  private String couverture;
-
-  @Column(name = "p_age")
-  private Integer age;
-
-  @Column(name = "p_email")
-  private String email;
-
-  @OneToOne(mappedBy = "profil")
+  @ManyToOne
+  @JoinColumn(name = "p_compte_id", referencedColumnName = "c_id")
   private Compte compte;
+
+  @OneToMany(mappedBy = "publication")
+  @ToString.Exclude
+  private Set<Commentaire> commentaires;
 
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-    Profil profil = (Profil) o;
-    return id != null && Objects.equals(id, profil.id);
+    Publication that = (Publication) o;
+    return id != null && Objects.equals(id, that.id);
   }
 
   @Override

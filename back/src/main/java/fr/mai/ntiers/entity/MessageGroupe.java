@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -14,7 +13,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import java.util.Objects;
@@ -22,48 +22,38 @@ import java.util.Objects;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
-@Table(name = "t_profil")
-@AllArgsConstructor
-@NoArgsConstructor
+@Table(name = "t_message_groupe")
 @Getter
 @Setter
 @ToString
-@RequiredArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
-public class Profil {
+public class MessageGroupe {
 
   @Id
   @GeneratedValue(strategy = IDENTITY)
-  @Column(name = "p_id")
+  @Column(name = "mg_id")
   private Long id;
 
-  @Column(name = "p_nom", nullable = false)
-  private String nom;
+  @Column(name = "mg_texte")
+  private String texte;
 
-  @Column(name = "p_prenom", nullable = false)
-  private String prenom;
+  @ManyToOne
+  @JoinColumn(name = "mg_groupe_destination_id", referencedColumnName = "ga_id")
+  @ToString.Exclude
+  private GroupeAmis groupeAmisDestination;
 
-  @Column(name = "p_photos", nullable = false)
-  private String photos;
-
-  @Column(name = "p_couverture")
-  private String couverture;
-
-  @Column(name = "p_age")
-  private Integer age;
-
-  @Column(name = "p_email")
-  private String email;
-
-  @OneToOne(mappedBy = "profil")
-  private Compte compte;
+  @ManyToOne
+  @JoinColumn(name = "mg_compte_source_id", referencedColumnName = "c_id")
+  private Compte compteSource;
 
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-    Profil profil = (Profil) o;
-    return id != null && Objects.equals(id, profil.id);
+    MessageGroupe that = (MessageGroupe) o;
+    return id != null && Objects.equals(id, that.id);
   }
 
   @Override
