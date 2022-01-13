@@ -1,0 +1,9 @@
+security:
+  jwt:
+    token: "lkdjgqksdjflkdjfdslkjfj"
+    header-prefix: "Bearer "
+    authorization-header: "Authorization"
+    expiration-date: 8640000000
+  authorizedUrl:
+    register-url: "/compte/enregistrement"
+    login-url: "/compte/login"

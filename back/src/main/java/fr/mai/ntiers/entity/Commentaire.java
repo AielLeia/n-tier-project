@@ -40,11 +40,11 @@ public class Commentaire {
   private String texte;
 
   @ManyToOne
-  @JoinColumn(name = "com_compte_id", referencedColumnName = "c_id")
+  @JoinColumn(name = "com_compte_id")
   private Compte compte;
 
   @ManyToOne
-  @JoinColumn(name = "com_publication_id", referencedColumnName = "p_id")
+  @JoinColumn(name = "com_publication_id")
   private Publication publication;
 
   @Override

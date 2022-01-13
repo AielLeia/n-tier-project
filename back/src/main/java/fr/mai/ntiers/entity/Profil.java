@@ -28,7 +28,6 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Getter
 @Setter
 @ToString
-@RequiredArgsConstructor
 @Builder
 public class Profil {
 

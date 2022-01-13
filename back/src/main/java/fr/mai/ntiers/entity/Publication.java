@@ -42,7 +42,7 @@ public class Publication {
   private String image;
 
   @ManyToOne
-  @JoinColumn(name = "p_compte_id", referencedColumnName = "c_id")
+  @JoinColumn(name = "p_compte_id")
   private Compte compte;
 
   @OneToMany(mappedBy = "publication")
