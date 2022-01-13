@@ -40,12 +40,12 @@ public class MessageGroupe {
   private String texte;
 
   @ManyToOne
-  @JoinColumn(name = "mg_groupe_destination_id", referencedColumnName = "ga_id")
+  @JoinColumn(name = "mg_groupe_destination_id")
   @ToString.Exclude
   private GroupeAmis groupeAmisDestination;
 
   @ManyToOne
-  @JoinColumn(name = "mg_compte_source_id", referencedColumnName = "c_id")
+  @JoinColumn(name = "mg_compte_source_id")
   private Compte compteSource;
 
   @Override

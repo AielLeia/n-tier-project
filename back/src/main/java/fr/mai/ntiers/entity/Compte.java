@@ -54,8 +54,8 @@ public class Compte {
   @ManyToMany
   @JoinTable(
     name = "t_amis",
-    joinColumns = @JoinColumn(name = "a_compte_id", referencedColumnName = "c_id"),
-    inverseJoinColumns = @JoinColumn(name = "a_ami_id", referencedColumnName = "c_id")
+    joinColumns = @JoinColumn(name = "a_compte_id"),
+    inverseJoinColumns = @JoinColumn(name = "a_ami_id")
   )
   @ToString.Exclude
   private Set<Compte> amis;

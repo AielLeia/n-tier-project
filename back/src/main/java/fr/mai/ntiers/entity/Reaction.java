@@ -45,11 +45,11 @@ public class Reaction {
   private TypeReaction typeReaction;
 
   @OneToOne
-  @JoinColumn(name = "rea_publication_id", referencedColumnName = "p_id")
+  @JoinColumn(name = "rea_publication_id")
   private Publication publication;
 
   @OneToMany
-  @JoinColumn(name = "rea_compte_id", referencedColumnName = "c_id")
+  @JoinColumn(name = "rea_compte_id")
   @ToString.Exclude
   private Set<Compte> compte;
 

@@ -40,12 +40,12 @@ public class Message {
   private String texte;
 
   @ManyToOne
-  @JoinColumn(name = "m_source_id", referencedColumnName = "c_id")
+  @JoinColumn(name = "m_source_id")
   @ToString.Exclude
   private Compte source;
 
   @ManyToOne
-  @JoinColumn(name = "m_destination_id", referencedColumnName = "c_id")
+  @JoinColumn(name = "m_destination_id")
   @ToString.Exclude
   private Compte destination;
 
