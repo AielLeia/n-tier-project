@@ -9,6 +9,8 @@
   "dependencies": {
     "@mdi/js": "^6.5.95",
     "@yeliulee/vue-mdi-svg": "^1.0.4",
+    "primeicons": "^5.0.0",
+    "primevue": "^3.10.0",
     "typescript": "^4.5.4",
     "vue": "^3.2.23",
     "vue-router": "^4.0.12",

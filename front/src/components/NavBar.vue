@@ -43,7 +43,7 @@ const expandMenu = () => {
   .navbar {
     display: flex;
     flex-direction: row;
-    background: var(--bg-color);
+    background: var(--theme-color);
     justify-content: space-between;
     align-items: center;
     width: 100%;
@@ -51,7 +51,7 @@ const expandMenu = () => {
     position: fixed;
     top: 0;
     left: 0;
-    border-radius: 0 0 10px 10px;
+    z-index: 999;
   }
 
   .navbar .btn-menu {
@@ -66,13 +66,16 @@ const expandMenu = () => {
     flex-direction: row;
     align-items: center;
     gap: 10px;
+    -moz-user-select: none; /* Firefox */
+    -webkit-user-select: none; /* Chrome, Safari, Opéra depuis la version 15 */
+    -ms-user-select: none; /* Internet explorer depuis la version 10 et Edge */
+    user-select: none;
   }
 
   .navbar .title .logo-ubo {
     height: 50px;
     width: auto;
   }
-
   /*
   Theme switch
    */

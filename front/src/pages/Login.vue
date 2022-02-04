@@ -1,6 +1,10 @@
 <script setup>
 import {ref} from "vue";
 import { mdiEye, mdiEyeOff } from '@mdi/js';
+import { computed } from 'vue'
+import {useStore} from "vuex";
+
+let store = useStore();
 
 const login = ref("")
 const password = ref("")
@@ -19,6 +23,14 @@ const showPw = () => {
     inputType.value = "password"
   }
 }
+
+const validationPossible = computed(() => {
+  return login.value !== "" && password.value !== ""
+})
+
+const submitForm = () => {
+  store.dispatch("logUser", {login: login.value, password: password.value});
+}
 </script>
 
 <template>
@@ -30,7 +42,7 @@ const showPw = () => {
         <input :type="inputType" placeholder="Mot de passe" v-model="password"/>
         <MdiSvg style="position: absolute; right:8px;" @click="showPw" :path="icon" :size="30"/>
       </div>
-      <button>Valider</button>
+      <button @click="submitForm" :class="validationPossible ? 'enabled':'disabled'">Valider</button>
     </div>
   </div>
 </template>
@@ -53,33 +65,42 @@ const showPw = () => {
     gap: 15px;
     align-items: center;
     border-radius: 10px;
-    background: #F1F1F1;
+    background: var(--theme-color);
+    color: var(--font-color);
     box-shadow: 0px 0px 10px gray;
+  }
+
+  .card h1 {
+    color: var(--font-color);
   }
 
   input {
     border-radius: 10px;
     padding: 10px;
-    border: 4px solid #0095ff;
+    border: 4px solid var(--outline-color);
     font-size: 15pt;
     font-family: "Nunito sans";
+    outline: none;
   }
 
-  button {
-    cursor: pointer;
+  .enabled, .disabled {
     border-radius: 10px;
     padding: 10px;
     width: 60%;
-    background: #0095ff;
-    color: white;
-    border: 4px solid #167ac9;
     font-size: 15pt;
     transition: all linear .2s;
     font-family: "Nunito sans";
+    border: 4px solid;
   }
 
-  button:hover {
-    box-shadow: 0px 0px 5px #167ac9;
+  .enabled {
+    cursor: pointer;
+    background: var(--primary-color);
+    border-color: var(--secondary-color);
+  }
+
+  .enabled:hover {
+    box-shadow: 0px 0px 5px var(--secondary-color);
     transform: scale(1.01);
   }
 
@@ -88,5 +109,11 @@ const showPw = () => {
     display: flex;
     flex-direction: row;
     align-items: center;
+  }
+
+  .disabled {
+    background: #e0e0e0;
+    border-color: #e0e0e0;
+    color: #a1a1a1;
   }
 </style>

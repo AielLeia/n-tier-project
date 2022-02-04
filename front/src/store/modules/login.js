@@ -1,11 +1,11 @@
-
+import router from '../../router/main'
 
 const login = {
     state: () => ({  }),
     mutations: {  },
     actions: {
-        logUser(context) {
-            console.log("logUser");
+        logUser(context, loginVM) {
+            router.push({name: 'Home'}).catch(e => console.error(e))
         }
     },
     getters: {  }
