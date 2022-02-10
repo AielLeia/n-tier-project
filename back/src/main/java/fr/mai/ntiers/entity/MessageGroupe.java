@@ -19,7 +19,7 @@ import javax.persistence.Table;
 
 import java.util.Objects;
 
-import static javax.persistence.GenerationType.IDENTITY;
+import static javax.persistence.GenerationType.AUTO;
 
 @Entity
 @Table(name = "t_message_groupe")
@@ -32,7 +32,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 public class MessageGroupe {
 
   @Id
-  @GeneratedValue(strategy = IDENTITY)
+  @GeneratedValue(strategy = AUTO)
   @Column(name = "mg_id")
   private Long id;
 

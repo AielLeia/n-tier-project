@@ -7,4 +7,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 public interface CompteService extends UserDetailsService {
 
   CompteDto recupereCompteParIdentifiant(String identifiant);
+
+  CompteDto enregisterCompte(CompteDto compteDto);
 }

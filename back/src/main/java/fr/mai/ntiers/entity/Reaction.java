@@ -23,7 +23,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import static javax.persistence.EnumType.ORDINAL;
-import static javax.persistence.GenerationType.IDENTITY;
+import static javax.persistence.GenerationType.AUTO;
 
 @Entity
 @Table(name = "t_reaction")
@@ -36,7 +36,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 public class Reaction {
 
   @Id
-  @GeneratedValue(strategy = IDENTITY)
+  @GeneratedValue(strategy = AUTO)
   @Column(name = "rea_id")
   private Long id;
 
