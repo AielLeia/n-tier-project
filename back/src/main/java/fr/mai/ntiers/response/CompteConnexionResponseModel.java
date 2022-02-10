@@ -1,5 +1,6 @@
 package fr.mai.ntiers.response;
 
+import fr.mai.ntiers.dto.CompteDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,11 +10,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class CompteEnregistrementResponseModel {
-
-  private String identifiant;
+public class CompteConnexionResponseModel {
 
   private String token;
 
-  private ProfilEnregistrementResponseModel profil;
+  private CompteDto compteDto;
+
 }

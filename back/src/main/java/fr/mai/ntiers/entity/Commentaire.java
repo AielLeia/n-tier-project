@@ -19,7 +19,7 @@ import javax.persistence.Table;
 
 import java.util.Objects;
 
-import static javax.persistence.GenerationType.IDENTITY;
+import static javax.persistence.GenerationType.AUTO;
 
 @Entity
 @Table(name = "t_commentaire")
@@ -32,7 +32,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 public class Commentaire {
 
   @Id
-  @GeneratedValue(strategy = IDENTITY)
+  @GeneratedValue(strategy = AUTO)
   @Column(name = "com_id")
   private Long id;
 

@@ -23,8 +23,9 @@ import javax.persistence.Table;
 import java.util.Objects;
 import java.util.Set;
 
+import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.FetchType.EAGER;
-import static javax.persistence.GenerationType.IDENTITY;
+import static javax.persistence.GenerationType.AUTO;
 
 @Entity
 @Table(name = "t_compte")
@@ -37,7 +38,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 public class Compte {
 
   @Id
-  @GeneratedValue(strategy = IDENTITY)
+  @GeneratedValue(strategy = AUTO)
   @Column(name = "c_id")
   private Long id;
 
@@ -47,7 +48,7 @@ public class Compte {
   @Column(name = "c_identifiant", nullable = false, unique = true)
   private String identifiant;
 
-  @OneToOne(fetch = EAGER)
+  @OneToOne(fetch = EAGER, cascade = ALL)
   @JoinColumn(name = "c_p_id", nullable = false)
   private Profil profil;
 

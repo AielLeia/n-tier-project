@@ -1,38 +1,56 @@
 package fr.mai.ntiers.service.implemente;
 
 import fr.mai.ntiers.dto.CompteDto;
+import fr.mai.ntiers.entity.Compte;
+import fr.mai.ntiers.mapper.CompteMapper;
 import fr.mai.ntiers.repository.CompteRepository;
 import fr.mai.ntiers.service.CompteService;
+import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@Slf4j
 public class CompteServiceImpl implements CompteService {
 
   private final CompteRepository compteRepository;
 
-  public CompteServiceImpl(CompteRepository compteRepository) {
+  private final CompteMapper compteMapper;
+
+  private final BCryptPasswordEncoder bCryptPasswordEncoder;
+
+  public CompteServiceImpl(
+    CompteRepository compteRepository,
+    CompteMapper compteMapper,
+    BCryptPasswordEncoder bCryptPasswordEncoder
+  ) {
     this.compteRepository = compteRepository;
+    this.compteMapper = compteMapper;
+    this.bCryptPasswordEncoder = bCryptPasswordEncoder;
   }
 
   @Override
   public UserDetails loadUserByUsername(String identifiantEtudiant) throws UsernameNotFoundException {
-    return new User("1232456789", "$2y$10$2lsGiTtEHYKP7DgrmsCYMOGZysA.CLVBM5avHyN.4zyfa4u29.L0e", List.of());
+    Compte compte = compteRepository.findByIdentifiant(identifiantEtudiant).orElseThrow(() -> new UsernameNotFoundException(identifiantEtudiant));
+    return new User(compte.getIdentifiant(), compte.getMotsDePasseEncrypter(), List.of());
   }
 
   @Override
   public CompteDto recupereCompteParIdentifiant(String identifiant) {
-    return CompteDto
-      .builder()
-      .id(1L)
-      .identifiant("123456789")
-      .motsDePasseEncrypter("$2y$10$CCgvSBRyrHZ4FEuT6CmFju9N8Bo08EH2qFn1DH9rZsu07FWKMj/qm")
-      .profil(null)
-      .build();
+    return compteMapper.toCompteDto(compteRepository.findByIdentifiant(identifiant).orElseThrow(RuntimeException::new));
+  }
+
+  @Override
+  public CompteDto enregisterCompte(CompteDto compteDto) {
+    compteDto.setMotsDePasseEncrypter(bCryptPasswordEncoder.encode(compteDto.getMotsDePasse()));
+    Compte compteEntity = compteMapper.toCompteEntity(compteDto);
+    compteRepository.save(compteEntity);
+    return compteMapper.toCompteDto(compteEntity);
   }
 }
