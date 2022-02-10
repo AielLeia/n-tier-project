@@ -42,6 +42,7 @@ const expandMenu = () => {
 <style scoped>
   .navbar {
     display: flex;
+    text-align: center;
     flex-direction: row;
     background: var(--theme-color);
     justify-content: space-between;
@@ -58,6 +59,7 @@ const expandMenu = () => {
     color: var(--font-color);
     cursor: pointer;
     padding-left: 10px;
+    justify-self: flex-start;
   }
 
   .navbar .title {
@@ -83,6 +85,7 @@ const expandMenu = () => {
     display: flex;
     align-items: center;
     padding-right: 10px;
+    justify-self: flex-end;
   }
   em {
     margin-left: 10px;

@@ -25,11 +25,12 @@ const showPw = () => {
 }
 
 const validationPossible = computed(() => {
-  return login.value !== "" && password.value !== ""
+  return login.value !== "" && password.value.length >= 8
 })
 
 const submitForm = () => {
-  store.dispatch("logUser", {login: login.value, password: password.value});
+  if(login.value !== "" && password.value.length >= 8)
+    store.dispatch("logUser", {login: login.value, password: password.value});
 }
 </script>
 
@@ -43,6 +44,7 @@ const submitForm = () => {
         <MdiSvg style="position: absolute; right:8px;" @click="showPw" :path="icon" :size="30"/>
       </div>
       <button @click="submitForm" :class="validationPossible ? 'enabled':'disabled'">Valider</button>
+      <router-link to="/register">Pas encore de compte ? Créez-en un ici</router-link>
     </div>
   </div>
 </template>
