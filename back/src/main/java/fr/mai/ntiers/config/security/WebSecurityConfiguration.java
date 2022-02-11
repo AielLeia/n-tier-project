@@ -35,6 +35,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
+    http.headers().frameOptions().disable();
     http
       // Ajout du système de cors simple et basique
       .cors().and()
@@ -42,10 +43,11 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
       // Suppression de la vérification automatique to token csrf
       .csrf().disable()
 
-      // Url autorisé à être utiliser sont token jwt
+      // Url autorisé à être utilisées sans token jwt
       .authorizeHttpRequests()
       .antMatchers(POST, securityProperties.getAuthorizedUrl().getRegisterUrl()).permitAll() // Url d'enregistrement
       .antMatchers(POST, securityProperties.getAuthorizedUrl().getLoginUrl()).permitAll() // Url de login
+      .antMatchers(securityProperties.getAuthorizedUrl().getH2ConsoleUrl()).permitAll() // Url de h2
       .and()
 
 

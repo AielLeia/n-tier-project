@@ -1,4 +1,4 @@
-package fr.mai.ntiers.dto;
+package fr.mai.ntiers.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,16 +9,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class CompteDto {
-
-
-  private Long id;
-
-  private String motsDePasseEncrypter;
-
-  private String motsDePasse;
+public class CompteConnexionRequestModel {
 
   private String identifiant;
 
-  private ProfilDto profil;
+  private String motsDePasse;
 }

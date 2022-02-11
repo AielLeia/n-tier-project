@@ -1,4 +1,4 @@
-package fr.mai.ntiers.dto;
+package fr.mai.ntiers.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,15 +7,13 @@ import lombok.NoArgsConstructor;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ProfilDto {
-
-  private Long id;
+public class ProfilEnregistrementResponseModel {
 
   private String nom;
 
@@ -23,6 +21,6 @@ public class ProfilDto {
 
   private String email;
 
-  @JsonFormat(pattern = "dd/MM/yyyy")
-  private Date dateNaissance;
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+  private LocalDate dateNaissance;
 }
