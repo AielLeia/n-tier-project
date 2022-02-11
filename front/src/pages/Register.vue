@@ -1,22 +1,72 @@
 <script setup>
-
 import {computed, ref} from "vue";
+import {useStore} from "vuex";
+
+let store = useStore();
 
 const numEtudiant = ref("")
 const mail = ref("")
+const firstName = ref("")
+const name = ref("")
 const password = ref("")
 const passwordCheck = ref("")
-const date = ref(new Date())
+const birthDay = ref(null)
 
+const numValid = function () {
+  return numEtudiant.value.length > 8;
+}
 
-const validationPossible = computed(()=> {
-  return (numEtudiant.value.length === 8 &&
-      mail.value !== "" &&
-      password.value.length >= 8 &&
-      password.value === passwordCheck.value &&
-      date.value.valueOf() > 0 &&
-      date.value.valueOf() < new Date().valueOf())
-})
+const mailValid = function () {
+  if(mail.value.includes("@")) {
+    let s = mail.value.split("@")
+    return s[0].length > 4 && s[1].includes(".univ-brest.fr")
+  }
+  return false
+}
+const fnValid = function () {
+  return firstName.value.length > 1;
+}
+
+const nValid = function () {
+  return name.value.length > 1;
+}
+
+const pwValid = function () {
+  return password.value.length > 8;
+}
+
+const pwcValid = function () {
+  return passwordCheck.value.length > 8 && passwordCheck.value === password.value;
+}
+
+const dateValid = function () {
+  if(birthDay.value != null){
+    let diff = new Date().valueOf() - new Date(birthDay.value).valueOf()
+    return diff > 473040000000 // 15 ans
+  }
+  return false
+}
+
+const validationPossible = function() {
+  return numValid() && mailValid() && fnValid() && nValid() && pwValid() && pwcValid() && dateValid()
+}
+
+const submitForm = function() {
+  console.log()
+  if(validationPossible()) {
+    let d = new Date(birthDay.value)
+    let parsedDate = d.getDate() + "/" + (d.getMonth()+1) + "/" + d.getFullYear()
+    store.dispatch("register", {
+      identifiant: numEtudiant.value,
+      motsDePasse: password.value,
+      profil: {
+        nom: name.value,
+        prenom: firstName.value,
+        email: mail.value,
+        dateNaissance: "05/01/1984"
+      }});
+  }
+}
 </script>
 
 <template>
@@ -25,18 +75,22 @@ const validationPossible = computed(()=> {
       <h1>Inscription</h1>
       <div class="form">
         <label for="num">Numéro étudiant
-          <input id="num" type="number" placeholder="Contient 8 chiffres" v-model="numEtudiant"/></label>
+          <input id="num" :class="numValid() ? 'valid':''" type="text" placeholder="'e' suivi de 8 chiffres" v-model="numEtudiant"/></label>
         <label for="email">Adresse email
-          <input id="email" type="email" placeholder="Adresse étudiant" v-model="mail"/></label>
+          <input id="email" :class="mailValid() ? 'valid':''" type="email" placeholder="Adresse étudiant" v-model="mail"/></label>
+        <label for="firstName">Prénom
+          <input id="firstName" :class="fnValid() ? 'valid':''" type="text" placeholder="Prénom" v-model="firstName"/></label>
+        <label for="name">Nom
+          <input id="name" :class="nValid() ? 'valid':''" type="text" placeholder="Nom" v-model="name"/></label>
         <label for="pw">Mot de passe
-          <input id="pw" type="password" placeholder="Au moins 8 caractères" v-model="password"/></label>
+          <input id="pw" :class="pwValid() ? 'valid':''" type="password" placeholder="Au moins 8 caractères" v-model="password"/></label>
         <label for="pwc">Confirmer le mot de passe
-          <input id="pwc" type="password" placeholder="Doit être identique" v-model="passwordCheck"/></label>
+          <input id="pwc" :class="pwcValid() ? 'valid':''" type="password" placeholder="Doit être identique" v-model="passwordCheck"/></label>
         <label for="date">Date de naissance
-          <input id="date" type="date" v-model="date"/></label>
+          <input id="date" :class="dateValid() ? 'valid':''" type="date" v-model="birthDay"/></label>
       </div>
-      <div @click="submitForm" :class="validationPossible ? 'enabled':'disabled'">Valider</div>
-      <router-link to="/login">Déjà inscrit ?</router-link>
+      <button :class="validationPossible() ? 'enabled':'disabled'" @click="submitForm()">Valider</button>
+      <router-link to="/account">Déjà inscrit ?</router-link>
     </div>
   </div>
 </template>
@@ -87,6 +141,10 @@ input {
   outline: none;
 }
 
+.valid {
+  border-color: var(--secondary-color);
+}
+
 .enabled, .disabled {
   text-align: center;
   border-radius: 10px;
@@ -107,6 +165,12 @@ input {
 .enabled:hover {
   box-shadow: 0px 0px 5px var(--secondary-color);
   transform: scale(1.01);
+}
+
+.disabled {
+  background: #e0e0e0;
+  border-color: #e0e0e0;
+  color: #a1a1a1;
 }
 
 </style>

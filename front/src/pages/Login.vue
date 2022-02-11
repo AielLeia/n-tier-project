@@ -1,7 +1,6 @@
 <script setup>
 import {ref} from "vue";
 import { mdiEye, mdiEyeOff } from '@mdi/js';
-import { computed } from 'vue'
 import {useStore} from "vuex";
 
 let store = useStore();
@@ -24,13 +23,21 @@ const showPw = () => {
   }
 }
 
-const validationPossible = computed(() => {
-  return login.value !== "" && password.value.length >= 8
-})
+const numValid = function () {
+  return login.value !== "";
+}
+
+const pwValid = function () {
+  return password.value.length > 8;
+}
+
+const validationPossible = function() {
+  return numValid() && pwValid()
+}
 
 const submitForm = () => {
-  if(login.value !== "" && password.value.length >= 8)
-    store.dispatch("logUser", {login: login.value, password: password.value});
+  if(validationPossible())
+    store.dispatch("logUser", {identifiant: login.value, motsDePasse: password.value});
 }
 </script>
 
@@ -38,12 +45,12 @@ const submitForm = () => {
   <div class="login">
     <div class="card">
       <h1>Login</h1>
-      <input type="text" placeholder="Utilisateur" v-model="login"/>
+      <input type="text" :class="numValid() ? 'valid':''" placeholder="Utilisateur" v-model="login"/>
       <div id="password">
-        <input :type="inputType" placeholder="Mot de passe" v-model="password"/>
+        <input :type="inputType" :class="pwValid() ? 'valid':''" placeholder="Mot de passe" v-model="password"/>
         <MdiSvg style="position: absolute; right:8px;" @click="showPw" :path="icon" :size="30"/>
       </div>
-      <button @click="submitForm" :class="validationPossible ? 'enabled':'disabled'">Valider</button>
+      <button @click="submitForm()" :class="validationPossible() ? 'enabled':'disabled'">Valider</button>
       <router-link to="/register">Pas encore de compte ? Créez-en un ici</router-link>
     </div>
   </div>
@@ -95,6 +102,9 @@ const submitForm = () => {
     border: 4px solid;
   }
 
+  .valid {
+    border-color: var(--secondary-color);
+  }
   .enabled {
     cursor: pointer;
     background: var(--primary-color);
