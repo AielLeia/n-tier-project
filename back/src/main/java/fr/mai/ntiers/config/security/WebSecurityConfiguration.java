@@ -5,7 +5,9 @@ import fr.mai.ntiers.service.CompteService;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -13,6 +15,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import javax.servlet.Filter;
 
 import java.util.List;
 
@@ -22,6 +26,7 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
   private final SecurityProperties securityProperties;
@@ -82,12 +87,17 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
       // Filters
       .addFilter(getAuthenticationFilter())
+      .addFilter(getAuthorizationFilter())
 
       // On ne sauvegarde pas en session le token
       .sessionManagement()
       .sessionCreationPolicy(STATELESS)
     ;
 
+  }
+
+  private Filter getAuthorizationFilter() throws Exception {
+    return new AuthorizationFilter(authenticationManager(), securityProperties);
   }
 
   private AuthenticationFilter getAuthenticationFilter() throws Exception {

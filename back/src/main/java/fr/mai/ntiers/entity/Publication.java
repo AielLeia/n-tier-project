@@ -14,6 +14,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -40,6 +41,10 @@ public class Publication {
 
   @Column(name = "p_image")
   private String image;
+
+  @Column(name = "p_texte")
+  @Lob()
+  private String texte;
 
   @ManyToOne
   @JoinColumn(name = "p_compte_id")
