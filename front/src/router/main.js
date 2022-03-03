@@ -3,12 +3,26 @@ import Home from "../pages/Home.vue";
 import Login from "../pages/Login.vue";
 import Register from "../pages/Register.vue";
 import SuccessRegister from "../pages/SuccessRegister.vue";
+import Publications from "../pages/Publications.vue";
+import Profile from "../pages/Profile.vue";
 
 const routes = [
     {
         path: "/",
         name: "Home",
-        component: Home
+        component: Home,
+        children: [
+            {
+                path: "",
+                name: "Publications",
+                component: Publications
+            },
+            {
+                path: "/:userId",
+                name: "Profile",
+                component: Profile
+            }
+        ]
     },
     {
         path: "/account",

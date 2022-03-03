@@ -1,14 +1,20 @@
 <script setup>
+import {computed} from "vue";
+
 const props = defineProps({
-  icon: Object,
+  icon: String,
   title: String,
   linkTo: String,
   subText: String
 })
+
+const isActualRoute = computed(() => {
+  return window.location.href.includes(props.linkTo)
+})
 </script>
 
 <template>
-  <div class="left-menu-link">
+  <div :class="'left-menu-link' + (isActualRoute?' selected':'')">
     <MdiSvg :path="icon" :size="40"/>
     <div class="infos">
       <router-link class="link" :to="linkTo">{{title}}</router-link>
@@ -25,6 +31,11 @@ const props = defineProps({
   border-bottom: 2px solid var(--bg-color);
   gap: 10px;
   color: var(--font-color);
+}
+
+.selected{
+  background: var(--bg-color);
+  border-radius: 0 0 10px 10px;
 }
 
 .link {

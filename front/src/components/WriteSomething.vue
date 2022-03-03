@@ -1,4 +1,13 @@
 <script setup>
+import {ref} from 'vue'
+
+const text = ref("");
+
+const publish = function () {
+  if(text.value.length > 1) {
+    console.log(text.value)
+  }
+}
 
 </script>
 
@@ -10,7 +19,8 @@
     </div>
     <div id="content">
       <label for="text-area">Quoi de neuf ?</label>
-      <textarea id="text-area" rows="3" res placeholder="Partagez quelque-chose ..."></textarea>
+      <textarea id="text-area" rows="3" v-model="text" placeholder="Partagez quelque-chose ..."></textarea>
+      <div @click="publish()" :class="'publish' + (text.length < 1 ?' inactive':'')">Publier</div>
     </div>
   </div>
 </template>
@@ -65,6 +75,31 @@
   background: var(--text-area-color);
   color: var(--text-color);
   padding: 5px;
+}
+
+.publish {
+  border-radius: 10px;
+  width: 15%;
+  align-self: flex-end;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all ease-in-out 0.2s;
+  background-color: var(--primary-color);
+  border: 3px solid var(--secondary-color);
+}
+
+.publish:hover {
+  box-shadow: 0px 0px 10px var(--secondary-color);
+}
+
+.inactive {
+  color: var(--placeholder-color);
+  background-color: var(--text-area-color);
+  border-color: var(--placeholder-color);
 }
 
 ::placeholder {

@@ -7,10 +7,10 @@ import {mdiAccount, mdiAccountMultiple, mdiAccountGroup, mdiCloud} from '@mdi/js
 <template>
   <div class="left-menu">
     <div id="title">Gestion</div>
-    <LeftMenuLink :icon="mdiAccount" linkTo="/" title="Ali Hadj-Said" subText="2 notifications"/>
-    <LeftMenuLink :icon="mdiAccountMultiple" linkTo="/" title="Contacts" subText="1 invitation"/>
-    <LeftMenuLink :icon="mdiAccountGroup" linkTo="/" title="Groupes" subText="3 groupes intégrés"/>
-    <LeftMenuLink :icon="mdiCloud" linkTo="/" title="Stockage cloud" subText="0 ko utilisés"/>
+    <LeftMenuLink :icon="mdiAccount" linkTo="/e21706737" title="Ali Hadj-Said" subText="2 notifications"/>
+    <LeftMenuLink :icon="mdiAccountMultiple" linkTo="/contacts" title="Contacts" subText="1 invitation"/>
+    <LeftMenuLink :icon="mdiAccountGroup" linkTo="/groups" title="Groupes" subText="3 groupes intégrés"/>
+    <LeftMenuLink :icon="mdiCloud" linkTo="/cloud" title="Stockage cloud" subText="0 ko utilisés"/>
   </div>
 </template>
 

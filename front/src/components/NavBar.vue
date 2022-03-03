@@ -27,8 +27,10 @@ const expandMenu = () => {
       <MdiSvg :path="mdiMenu" :size="48"/>
     </div>
     <div class="title">
-      <img class="logo-ubo" :src="`/ubo-${theme}.png`">
-      <h1>UBO Live</h1>
+      <router-link class="title" to="/">
+        <img class="logo-ubo" :src="`/ubo-${theme}.png`">
+        <h1>UBO Live</h1>
+      </router-link>
     </div>
     <div class="theme-switch-wrapper">
       <label class="theme-switch" for="checkbox">
@@ -72,6 +74,7 @@ const expandMenu = () => {
     -webkit-user-select: none; /* Chrome, Safari, Opéra depuis la version 15 */
     -ms-user-select: none; /* Internet explorer depuis la version 10 et Edge */
     user-select: none;
+    text-decoration: none;
   }
 
   .navbar .title .logo-ubo {

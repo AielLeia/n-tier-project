@@ -6,7 +6,7 @@ import {ref} from "vue";
 const deployed = ref(false);
 
 const props = defineProps({
-  icon: Object,
+  icon: String,
   title: String,
   subText: String,
   elements: Array,

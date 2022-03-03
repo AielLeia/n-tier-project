@@ -2,10 +2,9 @@
 import LeftMenu from "../components/LeftMenu.vue"
 import RightMenu from "../components/RightMenu.vue"
 import {ref} from "vue";
-import MainPane from "../components/MainPane.vue";
+
 import NavBar from "../components/NavBar.vue"
 import {useStore} from "vuex";
-import WriteSomething from "../components/WriteSomething.vue";
 
 let store = useStore();
 
@@ -23,10 +22,7 @@ const expandMenu = () => {
       <LeftMenu v-if="menuExpanded"/>
     </transition>
     <RightMenu/>
-    <div id="content">
-      <WriteSomething/>
-      <MainPane/>
-    </div>
+    <RouterView/>
   </div>
 </template>
 
