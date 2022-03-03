@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -17,9 +16,10 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
-import static javax.persistence.GenerationType.IDENTITY;
+import static javax.persistence.GenerationType.AUTO;
 
 @Entity
 @Table(name = "t_profil")
@@ -32,7 +32,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 public class Profil {
 
   @Id
-  @GeneratedValue(strategy = IDENTITY)
+  @GeneratedValue(strategy = AUTO)
   @Column(name = "p_id")
   private Long id;
 
@@ -42,14 +42,14 @@ public class Profil {
   @Column(name = "p_prenom", nullable = false)
   private String prenom;
 
-  @Column(name = "p_photos", nullable = false)
+  @Column(name = "p_photos")
   private String photos;
 
   @Column(name = "p_couverture")
   private String couverture;
 
-  @Column(name = "p_age")
-  private Integer age;
+  @Column(name = "p_date_naissance")
+  private LocalDate dateNaissance;
 
   @Column(name = "p_email")
   private String email;

@@ -22,7 +22,7 @@ import javax.persistence.Table;
 import java.util.Objects;
 import java.util.Set;
 
-import static javax.persistence.GenerationType.IDENTITY;
+import static javax.persistence.GenerationType.AUTO;
 
 @Entity
 @Table(name = "t_groupe_amis")
@@ -35,7 +35,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 public class GroupeAmis {
 
   @Id
-  @GeneratedValue(strategy = IDENTITY)
+  @GeneratedValue(strategy = AUTO)
   @Column(name = "ga_id")
   private Long id;
 

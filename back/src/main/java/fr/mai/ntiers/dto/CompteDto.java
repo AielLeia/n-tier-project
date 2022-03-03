@@ -16,6 +16,8 @@ public class CompteDto {
 
   private String motsDePasseEncrypter;
 
+  private String motsDePasse;
+
   private String identifiant;
 
   private ProfilDto profil;

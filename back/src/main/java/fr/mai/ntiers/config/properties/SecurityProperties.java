@@ -38,5 +38,7 @@ public class SecurityProperties {
     private String registerUrl;
 
     private String loginUrl;
+
+    private String h2ConsoleUrl;
   }
 }

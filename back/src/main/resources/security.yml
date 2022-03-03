@@ -7,3 +7,4 @@ security:
   authorizedUrl:
     register-url: "/compte/enregistrement"
     login-url: "/compte/login"
+    h2-console-url: "/h2-console/**"
