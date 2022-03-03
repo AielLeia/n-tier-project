@@ -1,5 +1,5 @@
 <script setup>
-import {ref} from 'vue'
+import {computed, ref} from 'vue'
 
 const text = ref("");
 
@@ -9,13 +9,18 @@ const publish = function () {
   }
 }
 
+const name = computed(() => {
+  let profil = JSON.parse(sessionStorage.getItem("user")).profil
+  return profil.prenom + " " + profil.nom
+})
+
 </script>
 
 <template>
   <div class="write">
     <div id="heading">
       <img src="user.png" alt="photo de profil" id="pfp"/>
-      <h1>Ali Hadj-Said</h1>
+      <h1>{{ name }}</h1>
     </div>
     <div id="content">
       <label for="text-area">Quoi de neuf ?</label>
