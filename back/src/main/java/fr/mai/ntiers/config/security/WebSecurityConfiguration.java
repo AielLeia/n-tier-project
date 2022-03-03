@@ -3,13 +3,20 @@ package fr.mai.ntiers.config.security;
 import fr.mai.ntiers.config.properties.SecurityProperties;
 import fr.mai.ntiers.service.CompteService;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import java.util.List;
+
+import static org.springframework.http.HttpMethod.OPTIONS;
 import static org.springframework.http.HttpMethod.POST;
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
@@ -33,6 +40,21 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     this.compteService = compteService;
   }
 
+  @Bean
+  public CorsConfigurationSource corsConfigurationSource() {
+    final CorsConfiguration configuration = new CorsConfiguration();
+
+    configuration.setAllowedOrigins(List.of("*"));
+    configuration.setAllowedMethods(List.of("GET", "PUT", "DELETE", "POST", "PATCH", "OPTIONS"));
+    configuration.setAllowedHeaders(List.of("*"));
+    configuration.setExposedHeaders(List.of("Authorization", "Cache-Control", "Content-Type", "*"));
+
+    final UrlBasedCorsConfigurationSource urlBasedCorsConfigurationSource = new UrlBasedCorsConfigurationSource();
+    urlBasedCorsConfigurationSource.registerCorsConfiguration("/**", configuration);
+
+    return urlBasedCorsConfigurationSource;
+  }
+
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     http.headers().frameOptions().disable();
@@ -48,6 +70,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
       .antMatchers(POST, securityProperties.getAuthorizedUrl().getRegisterUrl()).permitAll() // Url d'enregistrement
       .antMatchers(POST, securityProperties.getAuthorizedUrl().getLoginUrl()).permitAll() // Url de login
       .antMatchers(securityProperties.getAuthorizedUrl().getH2ConsoleUrl()).permitAll() // Url de h2
+      .antMatchers(OPTIONS, "/**")
+      .permitAll()
       .and()
 
 
