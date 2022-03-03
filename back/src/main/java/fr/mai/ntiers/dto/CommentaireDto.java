@@ -9,15 +9,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class CompteDto {
+public class CommentaireDto {
 
   private Long id;
 
-  private String motsDePasseEncrypter;
-
-  private String motsDePasse;
-
-  private String identifiant;
-
-  private ProfilDto profil;
+  private String texte;
 }

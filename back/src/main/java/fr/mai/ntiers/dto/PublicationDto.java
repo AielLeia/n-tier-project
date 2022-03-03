@@ -5,19 +5,19 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Set;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class CompteDto {
+public class PublicationDto {
 
   private Long id;
 
-  private String motsDePasseEncrypter;
+  private String image;
 
-  private String motsDePasse;
+  private String texte;
 
-  private String identifiant;
-
-  private ProfilDto profil;
+  private Set<CommentaireDto> commentaires;
 }
