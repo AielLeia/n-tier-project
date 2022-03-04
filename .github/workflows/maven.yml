@@ -22,6 +22,8 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: maven
+    - name: Change directory
+      run: cd back
     - name: Maven Clean
       run: mvn clean --file pom.xml
     - name: Maven Compile
