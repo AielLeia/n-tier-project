@@ -52,10 +52,17 @@ const validationPossible = function() {
 }
 
 const submitForm = function() {
-  console.log()
   if(validationPossible()) {
     let d = new Date(birthDay.value)
-    let parsedDate = d.getDate() + "/" + (d.getMonth()+1) + "/" + d.getFullYear()
+    let day = d.getDate() + ""
+    if(day.length < 2) {
+      day = "0" + day
+    }
+    let month = (d.getMonth()+1) + ""
+    if(month.length < 2) {
+      month = "0" + day
+    }
+    let parsedDate = day + "/" + month + "/" + d.getFullYear()
     store.dispatch("register", {
       identifiant: numEtudiant.value,
       motsDePasse: password.value,
@@ -63,7 +70,7 @@ const submitForm = function() {
         nom: name.value,
         prenom: firstName.value,
         email: mail.value,
-        dateNaissance: "05/01/1984"
+        dateNaissance: parsedDate
       }});
   }
 }

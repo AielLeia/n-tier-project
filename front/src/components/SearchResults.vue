@@ -11,10 +11,6 @@ const filteredTitles = computed(() => {
     s.Name.toLowerCase().includes(props.query.toLowerCase())
   )
 })
-
-onMounted(() => {
-  console.log("mounted")
-})
 </script>
 
 <template>

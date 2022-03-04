@@ -50,6 +50,7 @@ public class PublicationServiceImpl implements PublicationService {
     String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     Compte compte = compteRepository.findByIdentifiant(principal).orElseThrow();
     compte.getPublications().add(publication);
+    publication.setCompte(compte);
     publicationRepository.save(publication);
     compteRepository.save(compte);
     return publicationMapper.toPublicationDto(publication);

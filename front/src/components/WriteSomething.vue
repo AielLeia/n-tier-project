@@ -1,4 +1,21 @@
 <script setup>
+import {computed, ref} from 'vue'
+import {useStore} from "vuex";
+
+const store = useStore();
+const text = ref("");
+
+const name = computed(() => {
+  let profil = JSON.parse(sessionStorage.getItem("user")).profil
+  return profil.prenom + " " + profil.nom
+})
+
+const publish = function () {
+  if(text.value.length > 1) {
+    store.dispatch("postPublications", text.value)
+    text.value = ""
+  }
+}
 
 </script>
 
@@ -6,11 +23,12 @@
   <div class="write">
     <div id="heading">
       <img src="user.png" alt="photo de profil" id="pfp"/>
-      <h1>Ali Hadj-Said</h1>
+      <h1>{{ name }}</h1>
     </div>
     <div id="content">
       <label for="text-area">Quoi de neuf ?</label>
-      <textarea id="text-area" rows="3" res placeholder="Partagez quelque-chose ..."></textarea>
+      <textarea id="text-area" rows="3" v-model="text" placeholder="Partagez quelque-chose ..."></textarea>
+      <div @click="publish()" :class="'publish' + (text.length < 1 ?' inactive':'')">Publier</div>
     </div>
   </div>
 </template>
@@ -65,6 +83,31 @@
   background: var(--text-area-color);
   color: var(--text-color);
   padding: 5px;
+}
+
+.publish {
+  border-radius: 10px;
+  width: 15%;
+  align-self: flex-end;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all ease-in-out 0.2s;
+  background-color: var(--primary-color);
+  border: 3px solid var(--secondary-color);
+}
+
+.publish:hover {
+  box-shadow: 0px 0px 10px var(--secondary-color);
+}
+
+.inactive {
+  color: var(--placeholder-color);
+  background-color: var(--text-area-color);
+  border-color: var(--placeholder-color);
 }
 
 ::placeholder {
