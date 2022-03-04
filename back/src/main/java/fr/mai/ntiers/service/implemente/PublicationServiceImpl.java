@@ -8,6 +8,7 @@ import fr.mai.ntiers.repository.CompteRepository;
 import fr.mai.ntiers.repository.PublicationRepository;
 import fr.mai.ntiers.service.PublicationService;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ import java.util.stream.Collectors;
 import static java.util.stream.Collectors.toSet;
 
 @Service
+@Slf4j
 public class PublicationServiceImpl implements PublicationService {
 
   private final PublicationRepository publicationRepository;
@@ -39,6 +41,7 @@ public class PublicationServiceImpl implements PublicationService {
   @Override
   public Set<PublicationDto> recupererPublications() {
     List<Publication> publications = publicationRepository.findAll();
+    log.info(String.valueOf(publications));
     return publications
       .stream()
       .map(publicationMapper::toPublicationDto)

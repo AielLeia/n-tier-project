@@ -28,7 +28,6 @@ import static javax.persistence.GenerationType.AUTO;
 @Table(name = "t_publication")
 @Getter
 @Setter
-@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder

@@ -4,6 +4,7 @@ const publications = {
     state: () => ({}),
     mutations: {
         setUserPublications(state, publications) {
+            console.log(publications)
             sessionStorage.setItem("userpubli", JSON.stringify(publications))
         },
         setPublications(state, publications) {
