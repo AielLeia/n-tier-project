@@ -23,12 +23,12 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Maven Clean
-      run: mvn clean
+      run: mvn clean --file pom.xml
     - name: Maven Compile
-      run: mvn compile
+      run: mvn compile --file pom.xml
     - name: Maven Test
-      run: mvn test
+      run: mvn test --file pom.xml
     - name: Maven package
       run: mvn -B package --file pom.xml
     - name: Maven Install
-      run: mvn install
+      run: mvn install --file pom.xml
