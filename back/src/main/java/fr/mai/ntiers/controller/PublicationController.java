@@ -30,6 +30,15 @@ public class PublicationController implements PublicationControllerContract {
   }
 
   @Override
+  public Set<PublicationResponseModel> publications() {
+    return publicationService
+      .recupererPublications()
+      .stream()
+      .map(publicationMapper::toPublicationResponseModel)
+      .collect(toSet());
+  }
+
+  @Override
   public Set<PublicationResponseModel> publicationParUtilisateur(String id) {
     log.info(id);
     Set<PublicationDto> publicationDtos = publicationService.recupererPublicationParEtudiant(id);

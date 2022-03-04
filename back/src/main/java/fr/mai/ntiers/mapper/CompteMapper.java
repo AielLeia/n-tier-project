@@ -4,6 +4,7 @@ import fr.mai.ntiers.dto.CompteDto;
 import fr.mai.ntiers.entity.Compte;
 import fr.mai.ntiers.request.CompteEnregistrementRequestModel;
 import fr.mai.ntiers.response.CompteEnregistrementResponseModel;
+import fr.mai.ntiers.response.CompteResponseModel;
 
 import org.mapstruct.Mapper;
 
@@ -52,4 +53,13 @@ public interface CompteMapper {
    * @return Objet modélisant une réponse HTTP.
    */
   CompteEnregistrementResponseModel toCompteEnregistrementResponseModel(CompteDto compteDto);
+
+  /**
+   * Convertie via la librairie mapstruct, un objet de transfert compte
+   * en un objet destiné à modéliser une réponse HTTP.
+   *
+   * @param compteDto Objet de transfert a convertie
+   * @return Objet modélisant une réponse HTTP.
+   */
+  CompteResponseModel toCompteResponseModel(CompteDto compteDto);
 }
