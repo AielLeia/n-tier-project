@@ -3,12 +3,16 @@ import {HTTP} from "../../http/axios";
 const publications = {
     state: () => ({}),
     mutations: {
-        setPublications(state, publications) {
+        setUserPublications(state, publications) {
             sessionStorage.setItem("userpubli", JSON.stringify(publications))
+        },
+        setPublications(state, publications) {
+            console.log(publications)
+            sessionStorage.setItem("publi", JSON.stringify(publications))
         }
     },
     actions: {
-        getPublications({commit}, id) {
+        getUserPublications({commit}, id) {
             let token = "Bearer " + sessionStorage.getItem("token")
             HTTP.get("/publications/" + id, {
                 headers: {
@@ -25,13 +29,21 @@ const publications = {
                     Authorization: token
                 }
             }).then(res => {
-                HTTP.get("/publications/" + id, {
+                HTTP.get("/publications/", {
                     headers: {
                         Authorization: token
                     }
                 }).then(res => commit("setPublications", res.data))
             })
-        }
+        },
+        getPublications({commit}, id) {
+            let token = "Bearer " + sessionStorage.getItem("token")
+            HTTP.get("/publications/", {
+                headers: {
+                    Authorization: token
+                }
+            }).then(res => commit("setPublications", res.data))
+        },
     },
     getters: {}
 }

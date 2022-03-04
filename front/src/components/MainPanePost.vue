@@ -18,6 +18,8 @@ const switchComments = function () {
   if (props.commentaires.length > 0)
     showComments.value = !showComments.value
 }
+
+
 </script>
 
 <template>

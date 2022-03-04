@@ -20,4 +20,6 @@ public class PublicationDto {
   private String texte;
 
   private Set<CommentaireDto> commentaires;
+
+  private CompteDto compte;
 }

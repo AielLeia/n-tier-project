@@ -1,7 +1,7 @@
 <script setup>
 import Post from "./MainPanePost.vue"
 import {useStore} from "vuex";
-import {onMounted} from "vue";
+import {computed, onMounted} from "vue";
 
 let store = useStore()
 
@@ -31,10 +31,19 @@ const getComs = function (id) {
   return coms[id]
 }
 
+const publis = computed(() => {
+  return JSON.parse(sessionStorage.getItem("publi"))
+})
+
+onMounted(() => {
+  store.dispatch("getPublications")
+})
+
 </script>
 
 <template>
   <div class="main">
+    <Post v-for="publi in publis" :key="publi.id" :publisher="publi.compte.profil.prenom + ' ' + publi.compte.profil.nom" :text="publi.texte"/>
     <Post publisher="Ismaël Mohamed-BOUH" text="Bonjour, je suis nouveau à l'UBO." :commentaires="getComs(0)"/>
     <Post publisher="Evan Leuzel" text="Petit Lost Ark pendant Papi ?"/>
     <Post publisher="Titouan Larnicol-Primot"

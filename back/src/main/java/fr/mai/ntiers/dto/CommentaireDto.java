@@ -14,4 +14,6 @@ public class CommentaireDto {
   private Long id;
 
   private String texte;
+
+  private CompteDto compte;
 }

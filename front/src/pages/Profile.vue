@@ -11,7 +11,7 @@ const disconnect = function () {
 }
 
 onMounted(() => {
-  store.dispatch("getPublications", JSON.parse(sessionStorage.getItem("user")).identifiant)
+  store.dispatch("getUserPublications", JSON.parse(sessionStorage.getItem("user")).identifiant)
 })
 
 const user = computed(() => {
