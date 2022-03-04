@@ -25,7 +25,6 @@ import static javax.persistence.GenerationType.AUTO;
 @Table(name = "t_message_groupe")
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder

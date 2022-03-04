@@ -29,7 +29,6 @@ import static javax.persistence.GenerationType.AUTO;
 @Table(name = "t_reaction")
 @Getter
 @Setter
-@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder

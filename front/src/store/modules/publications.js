@@ -4,11 +4,9 @@ const publications = {
     state: () => ({}),
     mutations: {
         setUserPublications(state, publications) {
-            console.log(publications)
             sessionStorage.setItem("userpubli", JSON.stringify(publications))
         },
         setPublications(state, publications) {
-            console.log(publications)
             sessionStorage.setItem("publi", JSON.stringify(publications))
         }
     },
@@ -19,7 +17,7 @@ const publications = {
                 headers: {
                     Authorization: token
                 }
-            }).then(res => commit("setPublications", res.data))
+            }).then(res => commit("setUserPublications", res.data))
         },
         postPublications({commit}, publication) {
             let token = "Bearer " + sessionStorage.getItem("token")

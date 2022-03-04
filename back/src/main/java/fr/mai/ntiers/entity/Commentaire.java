@@ -25,7 +25,6 @@ import static javax.persistence.GenerationType.AUTO;
 @Table(name = "t_commentaire")
 @Getter
 @Setter
-@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder

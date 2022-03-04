@@ -28,7 +28,6 @@ import static javax.persistence.GenerationType.AUTO;
 @Table(name = "t_groupe_amis")
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder

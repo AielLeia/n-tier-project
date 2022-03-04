@@ -19,7 +19,6 @@ const switchComments = function () {
     showComments.value = !showComments.value
 }
 
-
 </script>
 
 <template>

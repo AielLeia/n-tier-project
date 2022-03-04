@@ -27,7 +27,6 @@ import static javax.persistence.GenerationType.AUTO;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
 @Builder
 public class Profil {
 

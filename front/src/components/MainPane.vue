@@ -43,13 +43,9 @@ onMounted(() => {
 
 <template>
   <div class="main">
-    <Post v-for="publi in publis" :key="publi.id" :publisher="publi.compte.profil.prenom + ' ' + publi.compte.profil.nom" :text="publi.texte"/>
-    <Post publisher="Ismaël Mohamed-BOUH" text="Bonjour, je suis nouveau à l'UBO." :commentaires="getComs(0)"/>
-    <Post publisher="Evan Leuzel" text="Petit Lost Ark pendant Papi ?"/>
+    <Post v-for="publi in publis" :key="publi.id" :publisher="publi.compte.profil.prenom + ' ' + publi.compte.profil.nom" :text="publi.texte" :commentaires="publi.commentaires"/>
     <Post publisher="Titouan Larnicol-Primot"
           text="Bonjour, je suis actuellement à la recherche d'une alternance pour mon redoublement de M2. L'année dernière j'ai eu l'occasion de travailler à SopraSteria qui n'a pas souhaité continuer l'aventure avec moi. Contactez-moi par DM si intéressés."/>
-    <Post publisher="Ali Hadj-Said" text="Je t'aime, Ismaël"/>
-    <Post publisher="Tibo RB" text="Salut"/>
   </div>
 </template>
 
