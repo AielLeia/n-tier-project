@@ -9,10 +9,11 @@ import fr.mai.ntiers.repository.PublicationRepository;
 import fr.mai.ntiers.service.PublicationService;
 
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toSet;
 
@@ -33,6 +34,15 @@ public class PublicationServiceImpl implements PublicationService {
     this.publicationRepository = publicationRepository;
     this.compteRepository = compteRepository;
     this.publicationMapper = publicationMapper;
+  }
+
+  @Override
+  public Set<PublicationDto> recupererPublications() {
+    List<Publication> publications = publicationRepository.findAll();
+    return publications
+      .stream()
+      .map(publicationMapper::toPublicationDto)
+      .collect(Collectors.toSet());
   }
 
   @Override

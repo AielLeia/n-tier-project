@@ -14,6 +14,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -52,5 +54,14 @@ public class CompteServiceImpl implements CompteService {
     Compte compteEntity = compteMapper.toCompteEntity(compteDto);
     compteRepository.save(compteEntity);
     return compteMapper.toCompteDto(compteEntity);
+  }
+
+  @Override
+  public Set<CompteDto> utilisateurs() {
+    return compteRepository
+      .findAll()
+      .stream()
+      .map(compteMapper::toCompteDto)
+      .collect(Collectors.toSet());
   }
 }

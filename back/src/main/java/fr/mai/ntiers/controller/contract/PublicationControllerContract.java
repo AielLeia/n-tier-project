@@ -14,6 +14,9 @@ import java.util.Set;
 @RequestMapping("/publications")
 public interface PublicationControllerContract {
 
+  @GetMapping
+  Set<PublicationResponseModel> publications();
+
   @GetMapping("/{id}")
   Set<PublicationResponseModel> publicationParUtilisateur(@PathVariable("id") String id);
 
