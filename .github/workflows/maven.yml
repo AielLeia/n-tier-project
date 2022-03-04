@@ -22,15 +22,13 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: maven
-    - name: Change directory
-      run: cd back
     - name: Maven Clean
-      run: mvn clean --file pom.xml
+      run: cd back && mvn clean --file pom.xml
     - name: Maven Compile
-      run: mvn compile --file pom.xml
+      run: cd back && mvn compile --file pom.xml
     - name: Maven Test
-      run: mvn test --file pom.xml
+      run: cd back && mvn test --file pom.xml
     - name: Maven package
-      run: mvn -B package --file pom.xml
+      run: cd back && mvn -B package --file pom.xml
     - name: Maven Install
-      run: mvn install --file pom.xml
+      run: cd back && mvn install --file pom.xml
