@@ -1,18 +1,21 @@
 <script setup>
 import {computed, ref} from 'vue'
+import {useStore} from "vuex";
 
+const store = useStore();
 const text = ref("");
-
-const publish = function () {
-  if(text.value.length > 1) {
-    console.log(text.value)
-  }
-}
 
 const name = computed(() => {
   let profil = JSON.parse(sessionStorage.getItem("user")).profil
   return profil.prenom + " " + profil.nom
 })
+
+const publish = function () {
+  if(text.value.length > 1) {
+    store.dispatch("postPublications", text.value)
+    text.value = ""
+  }
+}
 
 </script>
 

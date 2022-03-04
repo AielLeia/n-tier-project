@@ -7,6 +7,7 @@ import fr.mai.ntiers.request.PublicationRequestModel;
 import fr.mai.ntiers.response.PublicationResponseModel;
 import fr.mai.ntiers.service.PublicationService;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Set;
@@ -14,6 +15,7 @@ import java.util.Set;
 import static java.util.stream.Collectors.toSet;
 
 @RestController
+@Slf4j
 public class PublicationController implements PublicationControllerContract {
   private final PublicationService publicationService;
 
@@ -29,7 +31,9 @@ public class PublicationController implements PublicationControllerContract {
 
   @Override
   public Set<PublicationResponseModel> publicationParUtilisateur(String id) {
+    log.info(id);
     Set<PublicationDto> publicationDtos = publicationService.recupererPublicationParEtudiant(id);
+    log.info(String.valueOf(publicationDtos));
     return publicationDtos
       .stream()
       .map(publicationMapper::toPublicationResponseModel)

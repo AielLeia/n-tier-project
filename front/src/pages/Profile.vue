@@ -2,6 +2,7 @@
 import {mdiAccountOff} from '@mdi/js'
 import {useStore} from "vuex";
 import {computed, onMounted} from "vue"
+import MainPanePost from '../components/MainPanePost.vue'
 
 let store = useStore();
 
@@ -9,9 +10,16 @@ const disconnect = function () {
   store.dispatch("disconnect")
 }
 
+onMounted(() => {
+  store.dispatch("getPublications", JSON.parse(sessionStorage.getItem("user")).identifiant)
+})
 
 const user = computed(() => {
   return JSON.parse(sessionStorage.getItem("user"))
+})
+
+const publis = computed(() => {
+  return JSON.parse(sessionStorage.getItem("userpubli"))
 })
 
 const age = computed(() => {
@@ -38,6 +46,10 @@ const age = computed(() => {
         <span><b>Numéro étudiant:</b> {{user.identifiant}}</span>
         <span><b>Âge:</b> {{age}} ans</span>
         <span><b>Promotion:</b> M2 TIIL-A</span>
+      </div>
+      <h2>Vos publications:</h2>
+      <div class="publications">
+        <MainPanePost v-for="publi in publis" :key="publi.id" :publisher="user.profil.prenom + ' ' + user.profil.nom" :text="publi.texte" :commentaires="publi.commentaires"/>
       </div>
     </div>
   </div>
@@ -115,5 +127,15 @@ const age = computed(() => {
 
   #deco:hover {
     box-shadow: 0 0 6px red;
+  }
+
+  .publications {
+    width: 100%;
+    background: var(--bg-color);
+    border-radius: 15px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
   }
 </style>

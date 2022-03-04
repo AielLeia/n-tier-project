@@ -5,6 +5,9 @@ import Register from "../pages/Register.vue";
 import SuccessRegister from "../pages/SuccessRegister.vue";
 import Publications from "../pages/Publications.vue";
 import Profile from "../pages/Profile.vue";
+import Contacts from "../pages/Contacts.vue";
+import Groups from "../pages/Groups.vue";
+import Cloud from "../pages/Cloud.vue";
 
 const routes = [
     {
@@ -21,6 +24,21 @@ const routes = [
                 path: "/:userId",
                 name: "Profile",
                 component: Profile
+            },
+            {
+                path: "/contacts",
+                name: "Contacts",
+                component: Contacts
+            },
+            {
+                path: "/groups",
+                name: "Groups",
+                component: Groups
+            },
+            {
+                path: "/cloud",
+                name: "Cloud",
+                component: Cloud
             }
         ]
     },

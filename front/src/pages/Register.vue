@@ -52,7 +52,6 @@ const validationPossible = function() {
 }
 
 const submitForm = function() {
-  console.log()
   if(validationPossible()) {
     let d = new Date(birthDay.value)
     let day = d.getDate() + ""

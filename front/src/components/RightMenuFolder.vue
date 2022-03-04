@@ -14,7 +14,6 @@ const props = defineProps({
 
 const deploy = function () {
   deployed.value = !deployed.value;
-  console.log(deployed)
 }
 
 </script>
