@@ -1,7 +1,7 @@
 <script setup>
-import {mdiChevronRight} from '@mdi/js'
-import Conversation from './RightMenuFolderConversation.vue'
-import {ref} from "vue";
+import { mdiChevronRight } from "@mdi/js";
+import Conversation from "./RightMenuFolderConversation.vue";
+import { ref } from "vue";
 
 const deployed = ref(false);
 
@@ -10,30 +10,33 @@ const props = defineProps({
   title: String,
   subText: String,
   elements: Array,
-})
+});
 
 const deploy = function () {
   deployed.value = !deployed.value;
-  console.log(deployed)
-}
-
+  console.log(deployed);
+};
 </script>
 
 <template>
   <div class="folder">
     <div class="heading">
-      <MdiSvg :path="icon" :size="40"/>
+      <MdiSvg :path="icon" :size="40" />
       <div class="infos">
         <div class="title">{{ title }}</div>
         <div>{{ subText }}</div>
       </div>
-      <div @click="deploy()" :class="'chevron' + (deployed?' open':'')">
-        <MdiSvg :path="mdiChevronRight" :size="40"/>
+      <div @click="deploy()" :class="'chevron' + (deployed ? ' open' : '')">
+        <MdiSvg :path="mdiChevronRight" :size="40" />
       </div>
     </div>
     <transition name="dropdown">
       <div class="content" v-if="deployed">
-        <Conversation v-for="conversation in elements" :key="conversation.id" :conversation="conversation"/>
+        <Conversation
+          v-for="conversation in elements"
+          :key="conversation.id"
+          :conversation="conversation"
+        />
       </div>
     </transition>
   </div>
@@ -75,7 +78,7 @@ const deploy = function () {
   margin-right: 0;
   align-self: center;
   cursor: pointer;
-  transition: all ease-in-out .2s;
+  transition: all ease-in-out 0.2s;
 }
 
 .open {
@@ -84,11 +87,12 @@ const deploy = function () {
 
 .content {
   padding-left: 20px;
-  transition: all .4s ease-in-out;
+  transition: all 0.4s ease-in-out;
   transform-origin: top;
 }
 
-.dropdown-enter, .dropdown-leave-to{
+.dropdown-enter,
+.dropdown-leave-to {
   transform: scaleY(0);
   opacity: 0;
 }

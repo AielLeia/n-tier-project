@@ -1,2 +1,15 @@
-package fr.mai.ntiers.repository;public interface MessageRepository {
+package fr.mai.ntiers.repository;
+
+import fr.mai.ntiers.entity.Compte;
+import fr.mai.ntiers.entity.Message;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Optional;
+
+@Repository
+public interface MessageRepository extends JpaRepository<Message, Long> {
+
+    List<Message> findBySourceAndDestination(Compte idSource, Compte idDestination);
 }
